@@ -1,4 +1,4 @@
- 
+
 import { TreeNode } from './treeNode';
 
 export class Tree<T> {
@@ -7,6 +7,9 @@ export class Tree<T> {
   private currentNode: TreeNode<T>;
 
   constructor(rootValue: T) {
+    if (rootValue === undefined || rootValue === null) {
+      throw new Error('Root value cannot be undefined');
+    }
     this.root = new TreeNode(rootValue);
     this.currentNode = this.root;
   }
