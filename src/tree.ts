@@ -1,9 +1,9 @@
 import { TreeNode } from './treeNode';
 
 export enum EWalkingStrategy {
-  PRE = 'PRE',
-  POST = 'POST',
-  IN = 'IN',
+  PRE_ORDER = 'PRE_ORDER',
+  POST_ORDER = 'POST_ORDER',
+  IN_ORDER = 'IN_ORDER',
 }
 
 export class Tree<T> {
@@ -86,13 +86,13 @@ export class Tree<T> {
     };
 
     switch (strategy) {
-      case EWalkingStrategy.PRE:
+      case EWalkingStrategy.PRE_ORDER:
         traversePreOrder(this.root);
         break;
-      case EWalkingStrategy.POST:
+      case EWalkingStrategy.POST_ORDER:
         traversePostOrder(this.root);
         break;
-      case EWalkingStrategy.IN:
+      case EWalkingStrategy.IN_ORDER:
         traverseInOrder(this.root);
         break;
       default:
