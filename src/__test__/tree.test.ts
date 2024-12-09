@@ -1,4 +1,4 @@
-import { Tree } from '../tree';
+import { EWalkingStrategy, Tree } from '../tree';
 import { TreeNode } from '../treeNode';
 import { TreeUtils } from '../treeUtils';
 
@@ -47,7 +47,7 @@ describe('Tree', () => {
     child1.addChild(child1_1);
 
     const traversal: string[] = [];
-    tree.walk('pre', node => traversal.push(node.value));
+    tree.walk(EWalkingStrategy.PRE_ORDER, node => traversal.push(node.value));
     expect(traversal).toEqual(['Root', 'Child 1', 'Child 1-1', 'Child 2']);
   });
 
@@ -80,7 +80,6 @@ describe('Tree Initialization', () => {
     expect(tree.getRoot().value).toEqual({ id: 1, name: 'Root' });
   });
 });
-
 
 describe('TreeNode', () => {
   it('should identify root node', () => {
@@ -159,7 +158,7 @@ describe('Tree Navigation - Edge Cases', () => {
     const tree = new Tree('Root');
 
     const traversal: string[] = [];
-    tree.walk('pre', node => traversal.push(node.value));
+    tree.walk(EWalkingStrategy.PRE_ORDER, node => traversal.push(node.value));
     expect(traversal).toEqual(['Root']);
   });
 
@@ -173,7 +172,7 @@ describe('Tree Navigation - Edge Cases', () => {
     child1.addChild(child1_1);
 
     const traversal: string[] = [];
-    tree.walk('post', node => traversal.push(node.value));
+    tree.walk(EWalkingStrategy.POST_ORDER, node => traversal.push(node.value));
     expect(traversal).toEqual(['Child 1-1', 'Child 1', 'Child 2', 'Root']);
   });
 
@@ -187,7 +186,7 @@ describe('Tree Navigation - Edge Cases', () => {
     child1.addChild(child1_1);
 
     const traversal: string[] = [];
-    tree.walk('in', node => traversal.push(node.value));
+    tree.walk(EWalkingStrategy.IN_ORDER, node => traversal.push(node.value));
     expect(traversal).toEqual(['Child 1-1', 'Child 1', 'Root', 'Child 2']);
   });
 

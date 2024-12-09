@@ -1,14 +1,18 @@
-
 import { TreeNode } from './treeNode';
+
+export enum EWalkingStrategy {
+  PRE_ORDER = 'PRE_ORDER',
+  POST_ORDER = 'POST_ORDER',
+  IN_ORDER = 'IN_ORDER',
+}
 
 export class Tree<T> {
   private root: TreeNode<T>;
-
   private currentNode: TreeNode<T>;
 
   constructor(rootValue: T) {
     if (rootValue === undefined || rootValue === null) {
-      throw new Error('Root value cannot be undefined');
+      throw new Error('Root value cannot be undefined or null');
     }
     this.root = new TreeNode(rootValue);
     this.currentNode = this.root;
@@ -58,7 +62,7 @@ export class Tree<T> {
    * Percorre a árvore em diferentes estratégias de navegação.
    */
   walk(
-    strategy: 'pre' | 'post' | 'in',
+    strategy: EWalkingStrategy,
     callback: (node: TreeNode<T>) => void,
   ): void {
     const traversePreOrder = (node: TreeNode<T>) => {
@@ -81,12 +85,18 @@ export class Tree<T> {
       }
     };
 
-    if (strategy === 'pre') {
-      traversePreOrder(this.root);
-    } else if (strategy === 'post') {
-      traversePostOrder(this.root);
-    } else if (strategy === 'in') {
-      traverseInOrder(this.root);
+    switch (strategy) {
+      case EWalkingStrategy.PRE_ORDER:
+        traversePreOrder(this.root);
+        break;
+      case EWalkingStrategy.POST_ORDER:
+        traversePostOrder(this.root);
+        break;
+      case EWalkingStrategy.IN_ORDER:
+        traverseInOrder(this.root);
+        break;
+      default:
+        throw new Error('Invalid walking strategy');
     }
   }
 }
